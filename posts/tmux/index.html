@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.64.0-DEV" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Tmux&nbsp;&ndash;&nbsp;flyzero</title><link rel="stylesheet" href="/css/core.min.f2f000d0de8e5caae22dd9586cdc6b2c168ee075a7099cd2fe4e261f6d71165fe4430fba9d41f61ed8f74225dacb5b77.css" integrity="sha384-8vAA0N6OXKriLdlYbNxrLBaO4HWnCZzS/k4mH21xFl/kQw&#43;6nUH2Htj3QiXay1t3"><body>
+    <div class="base-body"><section id="header" class="site header max-body-width">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><img class="site logo" src="/img/logo.png" alt /><span class="site name">flyzero</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about">About</a></nav></div></span></div><div class="site slogan"><span class="title">记录生活点滴</span></div></section><div id="content" class="max-body-width"><section class="article header">
+    <h1 class="article title">Tmux</h1><p class="article date">Jun 21, 2018</p></section><article class="article markdown-body"><h3 id="tmux简介">tmux简介</h3>
+<blockquote>
+<p><a href="https://github.com/tmux/tmux/wiki"target="_blank">tmux</a>是一个终端复用器: 可以激活多个终端或窗口, 在每个终端都可以单独访问,可以关闭窗口将程序放在后台运行，需要的时候再重新连接。</p>
+</blockquote>
+<h3 id="模块">模块</h3>
+<ul>
+<li>session	会话: 一个服务器可以包含多个会话</li>
+<li>window	窗口: 一个会话可以包含多个窗口</li>
+<li>pane	面板: 一个窗口可以包含多个面板（分屏）</li>
+</ul>
+<h4 id="命令操作">命令操作</h4>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tmux new [-s 会话名 -n 窗口名]</td>
+<td>启动新会话</td>
+</tr>
+<tr>
+<td>tmux detach</td>
+<td>暂时离开当前会话</td>
+</tr>
+<tr>
+<td>tmux a [-t 会话名]</td>
+<td>恢复会话</td>
+</tr>
+<tr>
+<td>tmux ls</td>
+<td>列出所有会话</td>
+</tr>
+<tr>
+<td>tmux kill-server</td>
+<td>关闭所有会话</td>
+</tr>
+<tr>
+<td>tmux kill-session -t 会话名</td>
+<td>关闭会话</td>
+</tr>
+</tbody>
+</table>
+<h4 id="ctrlb操作">ctrl+b操作</h4>
+<h5 id="会话">会话</h5>
+<table>
+<thead>
+<tr>
+<th>ctrl+b+</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>:new&lt;回车&gt;</td>
+<td>启动新会话</td>
+</tr>
+<tr>
+<td>s</td>
+<td>列出所有会话</td>
+</tr>
+<tr>
+<td>$</td>
+<td>重命名当前会话</td>
+</tr>
+<tr>
+<td>d</td>
+<td>暂时离开当前会话</td>
+</tr>
+</tbody>
+</table>
+<h4 id="窗口">窗口</h4>
+<table>
+<thead>
+<tr>
+<th align="left">ctrl+b+</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">c</td>
+<td align="center">创建新窗口</td>
+</tr>
+<tr>
+<td align="left">w</td>
+<td align="center">列出所有窗口</td>
+</tr>
+<tr>
+<td align="left">[0-9]</td>
+<td align="center">数字键切换到指定窗口</td>
+</tr>
+<tr>
+<td align="left">n</td>
+<td align="center">后一个窗口</td>
+</tr>
+<tr>
+<td align="left">p</td>
+<td align="center">前一个窗口</td>
+</tr>
+<tr>
+<td align="left">f</td>
+<td align="center">查找窗口</td>
+</tr>
+<tr>
+<td align="left">,</td>
+<td align="center">重命名当前窗口</td>
+</tr>
+<tr>
+<td align="left">&amp;</td>
+<td align="center">关闭当前窗口</td>
+</tr>
+</tbody>
+</table>
+<h4 id="面板">面板</h4>
+<table>
+<thead>
+<tr>
+<th align="left">ctrl+b+</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">%</td>
+<td align="center">左右分割</td>
+</tr>
+<tr>
+<td align="left">&quot;</td>
+<td align="center">上下分割</td>
+</tr>
+<tr>
+<td align="left">o</td>
+<td align="center">交换面板</td>
+</tr>
+<tr>
+<td align="left">x</td>
+<td align="center">关闭面板</td>
+</tr>
+<tr>
+<td align="left">q</td>
+<td align="center">显示每个面板是第几个，当数字出现的时候按数字几就选中第几个面板</td>
+</tr>
+<tr>
+<td align="left">{</td>
+<td align="center">与上一个面板交换位置</td>
+</tr>
+<tr>
+<td align="left">}</td>
+<td align="center">与下一个面板交换位置</td>
+</tr>
+<tr>
+<td align="left">方向键</td>
+<td align="center">移动光标选择对应面板</td>
+</tr>
+<tr>
+<td align="left">z</td>
+<td align="center">切换面板最大化/最小化</td>
+</tr>
+<tr>
+<td align="left">ctrl+方向键</td>
+<td align="center">以1个单元格为单位移动边缘以调整当前面板大小</td>
+</tr>
+<tr>
+<td align="left">alt+方向键</td>
+<td align="center">以5个单元格为单位移动边缘以调整当前面板大小</td>
+</tr>
+<tr>
+<td align="left">page up</td>
+<td align="center">向上滚动屏幕，q 退出</td>
+</tr>
+<tr>
+<td align="left">page down</td>
+<td align="center">向下滚动屏幕，q 退出</td>
+</tr>
+<tr>
+<td align="left">[</td>
+<td align="center">复制模式，光标移动到复制内容位置，空格键开始，方向键选择复制，回车确认，q/Esc退出</td>
+</tr>
+<tr>
+<td align="left">]</td>
+<td align="center">进入粘贴模式，粘贴之前复制的内容，按q/Esc退出</td>
+</tr>
+</tbody>
+</table>
+<h3 id="排错">排错</h3>
+<p>sessions should be nested with care, unset $TMUX to force
+不能在tmux会话里面再新建会话 使用 <strong>ctrl-b :new</strong></p>
+</article><section class="article labels"><a class="category" href=/categories/software/>software</a><a class="category" href=/categories/linux/>linux</a><a class="tag" href=/tags/tmux/>tmux</a></section><section class="article discussion"><div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "flyzero.cn" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></section></div><section id="footer" class="footer max-body-width"><div class="footer-wrap">
+    <p class="copyright">©2020 flyzero.cn</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-156897505-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tmux on flyzero</title>
+    <link>/tags/tmux/</link>
+    <description>Recent content in tmux on flyzero</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>©2020 flyzero.cn</copyright>
+    <lastBuildDate>Thu, 21 Jun 2018 19:56:52 +0800</lastBuildDate>
+    
+        <atom:link href="/tags/tmux/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Tmux</title>
+      <link>/posts/tmux/</link>
+      <pubDate>Thu, 21 Jun 2018 19:56:52 +0800</pubDate>
+      
+      <guid>/posts/tmux/</guid>
+      <description>tmux简介 tmux是一个终端复用器: 可以激活多个终端或窗口, 在每个终端都可以单独访问,可以关闭窗口将程序放在后台运行，需要的时候再重新连接</description>
+    </item>
+    
+  </channel>
+</rss>
