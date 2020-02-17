@@ -1,38 +1,54 @@
 <!DOCTYPE html>
 <html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.64.0-DEV" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark"><title>[读]自顶向下方法(概述)&nbsp;&ndash;&nbsp;flyzero</title><link rel="stylesheet" href="/css/core.min.f2f000d0de8e5caae22dd9586cdc6b2c168ee075a7099cd2fe4e261f6d71165fe4430fba9d41f61ed8f74225dacb5b77.css" integrity="sha384-8vAA0N6OXKriLdlYbNxrLBaO4HWnCZzS/k4mH21xFl/kQw&#43;6nUH2Htj3QiXay1t3"><body>
+<meta name="supported-color-schemes" content="light dark"><title>Wireshark&nbsp;&ndash;&nbsp;flyzero</title><link rel="stylesheet" href="/css/core.min.f2f000d0de8e5caae22dd9586cdc6b2c168ee075a7099cd2fe4e261f6d71165fe4430fba9d41f61ed8f74225dacb5b77.css" integrity="sha384-8vAA0N6OXKriLdlYbNxrLBaO4HWnCZzS/k4mH21xFl/kQw&#43;6nUH2Htj3QiXay1t3"><body>
     <div class="base-body"><section id="header" class="site header max-body-width">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><img class="site logo" src="/img/logo.png" alt /><span class="site name">flyzero</span></a></span>
         <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about">About</a></nav></div></span></div><div class="site slogan"><span class="title">记录生活点滴</span></div></section><div id="content" class="max-body-width"><section class="article header">
-    <h1 class="article title">[读]自顶向下方法(概述)</h1><p class="article date">Feb 05, 2020</p></section><article class="article markdown-body"><ul>
-<li>
-<p><code>通信链路</code>：网络中两个节点之间的物理通道(电缆，光纤和无线电&hellip;)称为通信链路。</p>
-</li>
-<li>
-<p><code>分组</code>：一台端系统向另一台端系统发送数据时，发送端将数据分段，并加上首部字段，由此形成的信息术语叫做<code>分组</code>。</p>
-</li>
-<li>
-<p><code>分组交换机</code>：从它的一条<code>入</code>通信链路接收到分组，并从它的一条<code>出</code>通信链路转发分组。主要流行的类型是<code>路由器</code>和<code>链路层交换机</code>。</p>
-</li>
-<li>
-<p><code>套接字接口</code>：是一个抽象层，应用程序可以通过它发送或接收数据，可对其进行像对文件一样的打开、读写和关闭等操作。套接字允许应用程序将I/O插入到网络中，并与网络中的其他应用程序进行通信。网络套接字是IP地址与端口的组合。<code>实质</code>是一种独立于协议的网络编程接口。<code>类型</code>：流式套接字、数据报套接字和原始套接。</p>
-</li>
-<li>
-<p><code>协议</code>：定义了在两个或多个通信实体之间交换的报文的格式和顺序，以及报文发送和/或接收一条报文或其他事件所采用的动作。</p>
-</li>
-</ul>
-<h4 id="osi-七层模型">OSI 七层模型</h4>
-<blockquote>
-<p><a href="https://www.zhihu.com/question/24002080">https://www.zhihu.com/question/24002080</a></p>
-</blockquote>
-<blockquote>
-<p><a href="https://juejin.im/post/59eb06b1f265da430f313c7f">https://juejin.im/post/59eb06b1f265da430f313c7f</a></p>
-</blockquote>
+    <h1 class="article title">Wireshark</h1><p class="article date">Feb 10, 2020</p></section><article class="article markdown-body"><h3 id="0x00官方文档httpswwwwiresharkorgdocswsug_html_chunked">0x00、<a href="https://www.wireshark.org/docs/wsug_html_chunked/"target="_blank">官方文档</a></h3>
+<hr>
+<h3 id="0x01界面介绍">0x01、界面介绍</h3>
 <p><a target="_blank" rel="noopener noreferrer" 
-  href="http://qiniu.flyzero.cn/osi.jpg"><img  src="http://qiniu.flyzero.cn/osi.jpg"
+  href="http://qiniu.flyzero.cn/wireshark_interface.png"><img  src="http://qiniu.flyzero.cn/wireshark_interface.png"
         alt/></a></p>
-</article><section class="article labels"><a class="category" href=/categories/network/>network</a><a class="category" href=/categories/base/>base</a><a class="category" href=/categories/book/>book</a><a class="tag" href=/tags/%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B/>自顶向下</a></section><section class="article navigation"><p><a class="link" href="/posts/wireshark/"><span class="li">&larr;</span>Wireshark</a></p><p><a class="link" href="/posts/tmux/"><span class="li">&rarr;</span>Tmux</a class="link">
+<ol>
+<li><a href="https://www.wireshark.org/docs/wsug_html_chunked/ChUseMainToolbarSection.html"target="_blank">工具栏官方文档</a></li>
+<li><a href="https://www.wireshark.org/docs/wsug_html_chunked/ChWorkBuildDisplayFilterSection.html"target="_blank">过滤器表达式官方文档</a></li>
+<li><a href="https://www.wireshark.org/docs/wsug_html_chunked/ChUsePacketListPaneSection.html"target="_blank">数据包列表官方文档</a></li>
+<li><a href="https://www.wireshark.org/docs/dfref"target="_blank">数据包详情可以在此地址检索到对应的描述</a></li>
+</ol>
+<hr>
+<h3 id="0x02过滤规则">0x02、过滤规则</h3>
+<pre><code>// 运算符
+==，!=，&gt;，&lt;，&gt;=，&lt;=，&amp;&amp;，||，^^, ! 
+
+// 函数
+upper()
+lower()
+len()
+count()
+string()
+
+// contains 包含
+eg. ip.addr
+
+// matches 匹配
+eg. http.host matches &quot;\.(org|com|net)&quot;
+
+// 切片
+eg. tr.dst[0:3] == 0.6.29
+
+// in
+eg. http.request.method in {&quot;HEAD&quot; &quot;GET&quot;}
+
+//
+eth：mac地址
+addr：目标或源地址
+src：源地址
+dst：目标地址
+srcport,dstport
+
+</code></pre></article><section class="article labels"><a class="category" href=/categories/software/>software</a><a class="category" href=/categories/network/>network</a><a class="tag" href=/tags/wireshark/>Wireshark</a></section><section class="article navigation"><p><a class="link" href="/posts/udp/"><span class="li">&larr;</span>UDP协议</a></p><p><a class="link" href="/posts/top_down_1/"><span class="li">&rarr;</span>[读]自顶向下方法(概述)</a class="link">
     </p></section><section class="article discussion"><div id="disqus_thread"></div>
 <script type="application/javascript">
     var disqus_config = function () {

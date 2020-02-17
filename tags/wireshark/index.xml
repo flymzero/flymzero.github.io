@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>software on flyzero</title>
-    <link>/categories/software/</link>
-    <description>Recent content in software on flyzero</description>
+    <title>Wireshark on flyzero</title>
+    <link>/tags/wireshark/</link>
+    <description>Recent content in Wireshark on flyzero</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>©2020 flyzero.cn</copyright>
     <lastBuildDate>Mon, 10 Feb 2020 21:30:08 +0800</lastBuildDate>
     
-        <atom:link href="/categories/software/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/tags/wireshark/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -19,15 +19,6 @@
       
       <guid>/posts/wireshark/</guid>
       <description>0x00、官方文档 0x01、界面介绍 工具栏官方文档 过滤器表达式官方文档 数据包列表官方文档 数据包详情可以在此地址检索到对应的描述 0x02、过滤</description>
-    </item>
-    
-    <item>
-      <title>Tmux</title>
-      <link>/posts/tmux/</link>
-      <pubDate>Thu, 21 Jun 2018 19:56:52 +0800</pubDate>
-      
-      <guid>/posts/tmux/</guid>
-      <description>tmux简介 tmux是一个终端复用器: 可以激活多个终端或窗口, 在每个终端都可以单独访问,可以关闭窗口将程序放在后台运行，需要的时候再重新连接</description>
     </item>
     
   </channel>

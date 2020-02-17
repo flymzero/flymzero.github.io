@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>基础 on flyzero</title>
-    <link>/categories/%E5%9F%BA%E7%A1%80/</link>
-    <description>Recent content in 基础 on flyzero</description>
+    <title>base on flyzero</title>
+    <link>/categories/base/</link>
+    <description>Recent content in base on flyzero</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>©2020 flyzero.cn</copyright>
     <lastBuildDate>Wed, 05 Feb 2020 09:05:55 +0800</lastBuildDate>
     
-        <atom:link href="/categories/%E5%9F%BA%E7%A1%80/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/categories/base/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>

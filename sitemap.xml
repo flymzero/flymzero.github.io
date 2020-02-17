@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml"><url>
+    <loc>https://flyzero.cn/categories/</loc><lastmod>2020-02-18T01:40:42+08:00</lastmod></url><url>
+    <loc>https://flyzero.cn/</loc><lastmod>2020-02-18T01:40:42+08:00</lastmod></url><url>
+    <loc>https://flyzero.cn/categories/network/</loc><lastmod>2020-02-18T01:40:42+08:00</lastmod></url><url>
+    <loc>https://flyzero.cn/posts/</loc><lastmod>2020-02-18T01:40:42+08:00</lastmod></url><url>
+    <loc>https://flyzero.cn/tags/</loc><lastmod>2020-02-18T01:40:42+08:00</lastmod></url><url>
+    <loc>https://flyzero.cn/tags/udp/</loc><lastmod>2020-02-18T01:40:42+08:00</lastmod></url><url>
+    <loc>https://flyzero.cn/categories/udp/</loc><lastmod>2020-02-18T01:40:42+08:00</lastmod></url><url>
+    <loc>https://flyzero.cn/posts/udp/</loc><lastmod>2020-02-18T01:40:42+08:00</lastmod></url><url>
+    <loc>https://flyzero.cn/categories/software/</loc><lastmod>2020-02-10T21:30:08+08:00</lastmod></url><url>
+    <loc>https://flyzero.cn/tags/wireshark/</loc><lastmod>2020-02-10T21:30:08+08:00</lastmod></url><url>
+    <loc>https://flyzero.cn/posts/wireshark/</loc><lastmod>2020-02-10T21:30:08+08:00</lastmod></url><url>
     <loc>https://flyzero.cn/posts/top_down_1/</loc><lastmod>2020-02-05T09:05:55+08:00</lastmod></url><url>
-    <loc>https://flyzero.cn/categories/</loc><lastmod>2020-02-05T09:05:55+08:00</lastmod></url><url>
-    <loc>https://flyzero.cn/</loc><lastmod>2020-02-05T09:05:55+08:00</lastmod></url><url>
-    <loc>https://flyzero.cn/posts/</loc><lastmod>2020-02-05T09:05:55+08:00</lastmod></url><url>
-    <loc>https://flyzero.cn/tags/</loc><lastmod>2020-02-05T09:05:55+08:00</lastmod></url><url>
-    <loc>https://flyzero.cn/categories/%E5%9F%BA%E7%A1%80/</loc><lastmod>2020-02-05T09:05:55+08:00</lastmod></url><url>
-    <loc>https://flyzero.cn/categories/%E7%BD%91%E7%BB%9C/</loc><lastmod>2020-02-05T09:05:55+08:00</lastmod></url><url>
-    <loc>https://flyzero.cn/tags/%E7%BD%91%E7%BB%9C/</loc><lastmod>2020-02-05T09:05:55+08:00</lastmod></url><url>
+    <loc>https://flyzero.cn/categories/base/</loc><lastmod>2020-02-05T09:05:55+08:00</lastmod></url><url>
+    <loc>https://flyzero.cn/categories/book/</loc><lastmod>2020-02-05T09:05:55+08:00</lastmod></url><url>
     <loc>https://flyzero.cn/tags/%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B/</loc><lastmod>2020-02-05T09:05:55+08:00</lastmod></url><url>
     <loc>https://flyzero.cn/categories/linux/</loc><lastmod>2018-06-21T19:56:52+08:00</lastmod></url><url>
-    <loc>https://flyzero.cn/categories/software/</loc><lastmod>2018-06-21T19:56:52+08:00</lastmod></url><url>
     <loc>https://flyzero.cn/posts/tmux/</loc><lastmod>2018-06-21T19:56:52+08:00</lastmod></url><url>
     <loc>https://flyzero.cn/tags/tmux/</loc><lastmod>2018-06-21T19:56:52+08:00</lastmod></url><url>
     <loc>https://flyzero.cn/about/</loc><priority>0</priority></url></urlset>

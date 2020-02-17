@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.64.0-DEV" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>UDP协议&nbsp;&ndash;&nbsp;flyzero</title><link rel="stylesheet" href="/css/core.min.f2f000d0de8e5caae22dd9586cdc6b2c168ee075a7099cd2fe4e261f6d71165fe4430fba9d41f61ed8f74225dacb5b77.css" integrity="sha384-8vAA0N6OXKriLdlYbNxrLBaO4HWnCZzS/k4mH21xFl/kQw&#43;6nUH2Htj3QiXay1t3"><body>
+    <div class="base-body"><section id="header" class="site header max-body-width">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><img class="site logo" src="/img/logo.png" alt /><span class="site name">flyzero</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about">About</a></nav></div></span></div><div class="site slogan"><span class="title">记录生活点滴</span></div></section><div id="content" class="max-body-width"><section class="article header">
+    <h1 class="article title">UDP协议</h1><p class="article date">Feb 18, 2020</p></section><article class="article markdown-body"><h3 id="0x01udp协议分析">0x01、UDP协议分析</h3>
+<blockquote>
+<p><code>UDP(用户数据报协议 User Datagram Protocol)</code>: 是一个简单的面向数据报的通信协议，位于OSI模型的传输层。在<a href="https://tools.ietf.org/html/rfc768"target="_blank">RFC 768</a>中被规范。为网络层以上和应用层以下提供了一个简单的接口。UDP只提供数据的不可靠传递，它一旦把应用程序发给网络层的数据发送出去，就不保留数据备份（所以UDP有时候也被认为是不可靠的数据报协议）。UDP在IP数据报的头部仅仅加入了复用和数据校验字段。</p>
+</blockquote>
+<p>许多关键的互联网应用程序使用UDP，包括：</p>
+<ul>
+<li>域名系统（DNS），其中查询阶段必须快速，并且只包含单个请求，后跟单个回复数据包；</li>
+<li>动态主机配置协议（DHCP），用于动态分配IP地址；</li>
+<li>简单网络管理协议（SNMP）；</li>
+<li>路由信息协议（RIP）。</li>
+</ul>
+<p><a target="_blank" rel="noopener noreferrer" 
+  href="http://qiniu.flyzero.cn/UDP_datagram.png"><img  src="http://qiniu.flyzero.cn/UDP_datagram.png"
+        alt/></a></p>
+<p>UDP报头共4个字段(每个字段占2个字节)8字节。在IPv4中，“来源连接端口”和“校验和”是可选字段。在IPv6中，只有来源连接端口是可选字段。</p>
+<blockquote>
+<p>报文长度：UDP报头和数据总共占用的长度（最小8字节）</p>
+<p>校验和：如下图</p>
+<ol>
+<li>把伪头部添加到UDP上；</li>
+<li>计算初始时是需要将检验和字段添零的；</li>
+<li>把所有位划分为16位（2字节）的字(不足后面补0)</li>
+<li>把所有16位的字相加，如果遇到进位，则将高于16字节的进位部分的值加到最低位上。</li>
+<li>将所有字相加得到的结果应该为一个16位的数，将该数取反则可以得到检验和checksum。</li>
+</ol>
+</blockquote>
+<p><a target="_blank" rel="noopener noreferrer" 
+  href="http://qiniu.flyzero.cn/udp_ip4_checksum.png"><img  src="http://qiniu.flyzero.cn/udp_ip4_checksum.png"
+        alt="伪头部"/></a></p>
+<hr>
+<h3 id="0x02-udp示例ip4">0x02、 UDP示例(ip4)</h3>
+<p><a target="_blank" rel="noopener noreferrer" 
+  href="http://qiniu.flyzero.cn/udp_eg.png"><img  src="http://qiniu.flyzero.cn/udp_eg.png"
+        alt/></a></p>
+<ul>
+<li>来源地址：c0a8 10d7</li>
+<li>目的地址：c0a8 10e4</li>
+<li>全零 协议名 UDP报文长度：0011 0012</li>
+<li>来源端口 目标端口：aa43 270f</li>
+<li>报文长度 检验和：0012 0000</li>
+<li>数据：6865 6c6c 6f20 776f 7264</li>
+<li>检验和：ffffffffffff5da5</li>
+<li>rec msg:  hello word</li>
+</ul>
+<blockquote>
+<p><a href="https://github.com/flymzero/study_network/tree/master/UDP"target="_blank">客户端服务端代码</a></p>
+<p><a href="https://github.com/flymzero/study_network/blob/master/UDP/UDPServer.go#L64"target="_blank">关键计算函数checkSum</a></p>
+</blockquote>
+</article><section class="article labels"><a class="category" href=/categories/udp/>udp</a><a class="category" href=/categories/network/>network</a><a class="tag" href=/tags/udp/>udp</a></section><section class="article navigation"><p><a class="link" href="/posts/wireshark/"><span class="li">&rarr;</span>Wireshark</a class="link">
+    </p></section><section class="article discussion"><div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "flyzero" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></section></div><section id="footer" class="footer max-body-width"><div class="footer-wrap">
+    <p class="copyright">©2020 flyzero.cn</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-156897505-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+</div>
+</body>
+
+</html>
