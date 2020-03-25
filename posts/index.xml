@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>©2020 flyzero.cn</copyright>
-    <lastBuildDate>Tue, 18 Feb 2020 01:40:42 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 19 Mar 2020 22:14:48 +0800</lastBuildDate>
     
         <atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[算法] 二叉树</title>
+      <link>/posts/binary_tree/</link>
+      <pubDate>Thu, 19 Mar 2020 22:14:48 +0800</pubDate>
+      
+      <guid>/posts/binary_tree/</guid>
+      <description>0x01、遍历 0x011、深度遍历 0x0111、前序遍历 根结点 &amp;mdash;&amp;gt; 左子树 &amp;mdash;&amp;gt; 右子树（根左右） [13 8 1 6 11 17 15 25 22 27] 遍历节点时，再不为nil时，先输</description>
+    </item>
     
     <item>
       <title>UDP协议</title>

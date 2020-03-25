@@ -1,12 +1,45 @@
 <!DOCTYPE html>
 <html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.67.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark"><title>flyzero&nbsp;&ndash;&nbsp;记录生活点滴</title><link rel="stylesheet" href="/css/core.min.f2f000d0de8e5caae22dd9586cdc6b2c168ee075a7099cd2fe4e261f6d71165fe4430fba9d41f61ed8f74225dacb5b77.css" integrity="sha384-8vAA0N6OXKriLdlYbNxrLBaO4HWnCZzS/k4mH21xFl/kQw&#43;6nUH2Htj3QiXay1t3"><body>
+<meta name="supported-color-schemes" content="light dark"><title>[算法] 二叉树&nbsp;&ndash;&nbsp;flyzero</title><link rel="stylesheet" href="/css/core.min.f2f000d0de8e5caae22dd9586cdc6b2c168ee075a7099cd2fe4e261f6d71165fe4430fba9d41f61ed8f74225dacb5b77.css" integrity="sha384-8vAA0N6OXKriLdlYbNxrLBaO4HWnCZzS/k4mH21xFl/kQw&#43;6nUH2Htj3QiXay1t3"><body>
     <div class="base-body"><section id="header" class="site header max-body-width">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><img class="site logo" src="/img/logo.png" alt /><span class="site name">flyzero</span></a></span>
         <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about">About</a></nav></div></span></div><div class="site slogan"><span class="title">记录生活点滴</span></div></section><div id="content" class="max-body-width"><section class="article header">
-    <h1 class="article title"></h1></section><article class="article markdown-body"><h2 id="hello-world">Hello World</h2>
-</article><section class="article discussion"><div id="disqus_thread"></div>
+    <h1 class="article title">[算法] 二叉树</h1><p class="article date">Mar 19, 2020</p></section><article class="article markdown-body"><p><a target="_blank" rel="noopener noreferrer" 
+  href="http://qiniu.flyzero.cn/binary_tree.png"><img  src="http://qiniu.flyzero.cn/binary_tree.png"
+        alt/></a></p>
+<h2 id="0x01遍历">0x01、遍历</h2>
+<h3 id="0x011深度遍历">0x011、深度遍历</h3>
+<h5 id="0x0111前序遍历">0x0111、前序遍历</h5>
+<blockquote>
+<p>根结点 &mdash;&gt; 左子树 &mdash;&gt; 右子树（根左右）<br>
+[13 8 1 6 11 17 15 25 22 27]</p>
+</blockquote>
+<p>遍历节点时，再不为nil时，先输出根节点，再遍历左节点（把它作为一个新的节点，根节点），循环输出，直到最后一个节点的左节点为nil，遍历右节点（还是作为一个根节点），循环输出</p>
+<h5 id="0x0112中序遍历">0x0112、中序遍历</h5>
+<blockquote>
+<p>左子树&mdash;&gt; 根结点 &mdash;&gt; 右子树 （左根右）<br>
+[1 6 8 11 13 15 17 22 25 27]</p>
+</blockquote>
+<p>同上，只是顺序不一样，还是每次遍历一个节点时把它当成根节点思考</p>
+<h5 id="0x0113后序遍历">0x0113、后序遍历</h5>
+<blockquote>
+<p>左子树 &mdash;&gt; 右子树 &mdash;&gt; 根结点 （左右根）<br>
+[6 1 11 8 15 22 27 25 17 13]</p>
+</blockquote>
+<p>原理同上</p>
+<hr>
+<blockquote>
+<p><code>递归</code><br>
+每个节点（包含根左右）作为一个Item，每个Item的节点又作为一个Item(除根节点)对其做递归执行</p>
+</blockquote>
+<blockquote>
+<p><code>栈的遍历</code> （代码只写了中序遍历）<br>
+还是每个节点（包含根左右）作为一个Item，根据遍历顺序（前/中/后序）暂时不用的放到栈中，循环遍历下个Item,直到Item为空，那取出栈中的最后一个，遍历其另一个子节点</p>
+</blockquote>
+<p><a href="https://github.com/flymzero/study_algorithm/blob/master/leetcode/94.%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86.go"target="_blank">code地址</a></p>
+</article><section class="article labels"><a class="category" href=/categories/%E7%AE%97%E6%B3%95/>算法</a><a class="tag" href=/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/>二叉树</a></section><section class="article navigation"><p><a class="link" href="/posts/udp/"><span class="li">&rarr;</span>UDP协议</a class="link">
+    </p></section><section class="article discussion"><div id="disqus_thread"></div>
 <script type="application/javascript">
     var disqus_config = function () {
     
