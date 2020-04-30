@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.67.0" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Dockerfile 笔记&nbsp;&ndash;&nbsp;flyzero</title><link rel="stylesheet" href="/css/core.min.f2f000d0de8e5caae22dd9586cdc6b2c168ee075a7099cd2fe4e261f6d71165fe4430fba9d41f61ed8f74225dacb5b77.css" integrity="sha384-8vAA0N6OXKriLdlYbNxrLBaO4HWnCZzS/k4mH21xFl/kQw&#43;6nUH2Htj3QiXay1t3"><body>
+    <div class="base-body"><section id="header" class="site header max-body-width">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><img class="site logo" src="/img/logo.png" alt /><span class="site name">flyzero</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about">About</a></nav></div></span></div><div class="site slogan"><span class="title">记录生活点滴</span></div></section><div id="content" class="max-body-width"><section class="article header">
+    <h1 class="article title">Dockerfile 笔记</h1><p class="article date">Mar 19, 2020</p></section><article class="article markdown-body"><blockquote>
+<p><code>官方文档</code>：https://docs.docker.com/engine/reference/builder/</p>
+</blockquote>
+<h3 id="0x01用法">0x01、用法</h3>
+<blockquote>
+<p><code>docker build</code>（生成镜像）命令需要一个Dockerfile文件和上下文，这个上下文可以是本地文件夹路径，也可以是一个仓库地址。</p>
+<p>上下文尽量是空目录，不然会把上下文内容发送到docker守护程序（主要还是看上下文的内容需不需要使用），当然也可以使用<code>.dockerignore</code></p>
+<p><code>-f</code>：指定Dockerfile文件，默认是当前上下文中的Dockerfile <br>
+<code>-t</code>：指定仓库和标签（可多个）eg.<code>docker build -t shykes/myapp:1.0.2 -t shykes/myapp:latest .</code></p>
+</blockquote>
+<hr>
+<h3 id="0x02格式">0x02、格式</h3>
+<ul>
+<li>指令不区分大小写，但约定大写，便于与参数区分</li>
+<li><code>Dockerfile</code>按顺序执行指令，必须从<code>FROM</code>指令开始，但可以在<code>解析器指令</code>、<code>注释</code>、<code>全局范围的ARG</code>之后</li>
+</ul>
+<hr>
+<h3 id="0x03解析器指令">0x03、解析器指令</h3>
+<ul>
+<li>形式：<code># directive=value</code></li>
+<li>解析器指令是可选的</li>
+<li>解析器指令不区分大小写。约定是小写的</li>
+<li>所有解析器指令必须位于最顶部(包括注释，不然认为也是注释)</li>
+<li>解析器指令不会在构建中添加层</li>
+<li>允许非换行空格。eg. <code>#	directive= value</code></li>
+</ul>
+<hr>
+<h3 id="0x04环境变量-env">0x04、环境变量 ENV</h3>
+<ul>
+<li>形式：<code>ENV &lt;key&gt; &lt;value&gt;</code> 或者 <code>ENV &lt;key&gt;=&lt;value&gt; ...</code></li>
+</ul>
+<blockquote>
+<p><em>说明</em>：<code>ENV &lt;key&gt;=&lt;value&gt; ...</code>允许一次设置多个变量。<code>ENV &lt;key&gt; &lt;value&gt;</code> 会将一个变量设置为一个值。第一个空格之后的整个字符串将被视为<code>&lt;value&gt;</code>包括空格字符。</p>
+</blockquote>
+<ul>
+<li>修饰符:
+<ul>
+<li><code>${variable:-word}</code>表示如果variable设置，则结果将是该值。如果variable未设置，则为word结果。</li>
+<li><code>${variable:+word}</code>指示如果variable设置，则将是word结果，否则结果为空字符串。</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="k">ENV</span> <span class="nv">v1</span><span class="o">=</span>aa
+<span class="c"># 因为v1已设置，所以输出newaa</span><span class="err">
+</span><span class="err"></span><span class="k">RUN</span> <span class="nb">echo</span> <span class="si">${</span><span class="nv">v1</span><span class="p">:+newaa</span><span class="si">}</span> <span class="err">
+</span><span class="err"></span><span class="c"># 因为v2未设置，所以输出newbb</span><span class="err">
+</span><span class="err"></span><span class="k">RUN</span> <span class="nb">echo</span> <span class="si">${</span><span class="nv">v2</span><span class="k">:-</span><span class="nv">newbb</span><span class="si">}</span> <span class="err">
+</span></code></pre></div><ul>
+<li>转义：<code>\$foo</code>或<code>\${foo}</code>将分别转换为<code>$foo</code>和<code>${foo}</code></li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="k">FROM</span><span class="s"> busybox</span><span class="err">
+</span><span class="err"></span><span class="k">ENV</span> foo /bar<span class="err">
+</span><span class="err"></span><span class="k">WORKDIR</span><span class="s"> ${foo}   # WORKDIR /bar</span><span class="err">
+</span><span class="err"></span><span class="k">ADD</span> . <span class="nv">$foo</span>       <span class="c1"># ADD . /bar</span><span class="err">
+</span><span class="err"></span><span class="k">COPY</span> <span class="se">\$</span>foo /quux <span class="c1"># COPY $foo /quux</span><span class="err">
+</span></code></pre></div><hr>
+<h3 id="0x05from">0x05、FROM</h3>
+<ul>
+<li><code>FROM [--platform=&lt;platform&gt;] &lt;image&gt; [AS &lt;name&gt;]</code></li>
+<li><code>FROM [--platform=&lt;platform&gt;] &lt;image&gt;[:&lt;tag&gt;] [AS &lt;name&gt;]</code></li>
+<li><code>FROM [--platform=&lt;platform&gt;] &lt;image&gt;[@&lt;digest&gt;] [AS &lt;name&gt;]</code></li>
+<li><code>--platform</code>一般是在引用多平台镜像时，可选镜像平台。默认情况下，使用构建请求的目标平台</li>
+<li><code>AS name</code> 在后序的<code>FROM</code>或者<code>COPY</code>中使用</li>
+<li><code>tag</code>或<code>digest</code>值是可选的。如果忽略则使用<code>latest</code></li>
+</ul>
+<hr>
+<h3 id="0x06run">0x06、RUN</h3>
+<ul>
+<li>形式：</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="k">RUN</span> &lt;command&gt;<span class="err">
+</span><span class="err"></span><span class="k">RUN</span> <span class="o">[</span><span class="s2">&#34;executable&#34;</span>, <span class="s2">&#34;param1&#34;</span>, <span class="s2">&#34;param2&#34;</span><span class="o">]</span><span class="err">
+</span></code></pre></div><blockquote>
+<p><code>RUN指令</code>将在当前图像顶部的新层中执行所有命令，并提交结果。生成的提交图像将用于中的下一步<code>Dockerfile</code>。<br>
+创建新的镜像层，通常用于安装软件包.<br>
+该指令在<code>docker build</code>过程中运行.</p>
+</blockquote>
+<hr>
+<h3 id="0x07cmd">0x07、CMD</h3>
+<ul>
+<li>形式：
+<ul>
+<li>CMD [&ldquo;executable&rdquo;,&ldquo;param1&rdquo;,&ldquo;param2&rdquo;]（exec形式，这是首选形式）</li>
+<li>CMD [&ldquo;param1&rdquo;,&ldquo;param2&rdquo;]（作为ENTRYPOINT的默认参数）</li>
+<li>CMD command param1 param2（外壳形式）</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>CMD 在docker run 时运行<br>
+<code>CMD指令</code>中只能有一条指令。如果您列出多个，CMD 则只有<code>最后一个CMD</code>才会生效。<br>
+<code>CMD指令</code>为启动的容器指定默认要运行的程序，程序运行结束，容器也就结束；<br>
+注意: CMD 指令指定的程序可被 <code>docker run</code> 命令行参数中指定<code>要运行的程序所覆盖</code>。</p>
+</blockquote>
+<hr>
+<h3 id="0x08entrypoint">0x08、ENTRYPOINT</h3>
+<ul>
+<li>形式：</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="k">ENTRYPOINT</span> <span class="p">[</span><span class="s2">&#34;executable&#34;</span><span class="p">,</span> <span class="s2">&#34;param1&#34;</span><span class="p">,</span> <span class="s2">&#34;param2&#34;</span><span class="p">]</span><span class="err">
+</span><span class="err"></span><span class="k">ENTRYPOINT</span> <span class="nb">command</span> param1 param2<span class="err">
+</span></code></pre></div><blockquote>
+<p>类似于<code>CMD指令</code>，但其不会被 <code>docker run</code> 的命令行参数指定的指令所覆盖，而且这些命令行参数会被当作参数送给<code>ENTRYPOINT</code>指令指定的程序；但是, 如果运行<code>docker run</code>时使用了<code>--entrypoint</code>选项，此选项的参数可当作要运行的程序覆盖<code>ENTRYPOINT</code>指令指定的程序；</p>
+</blockquote>
+<hr>
+<h3 id="0x09entrypoint-与-cmd-区别">0x09、<code>ENTRYPOINT</code> 与 <code>CMD</code> 区别</h3>
+<blockquote>
+<p>把可能需要变动的参数写到 CMD 里面。然后你可以在 docker run 里指定参数，这样 CMD 里的参数(这里是-c) 就会被覆盖掉而 ENTRYPOINT 里的不被覆盖。</p>
+</blockquote>
+<div class="highlight"><pre class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="k">FROM</span><span class="s"> ubuntu:14.10  </span><span class="err">
+</span><span class="err"></span><span class="k">ENTRYPOINT</span> <span class="p">[</span><span class="s2">&#34;top&#34;</span><span class="p">,</span> <span class="s2">&#34;-b&#34;</span><span class="p">]</span>   <span class="err">
+</span><span class="err"></span><span class="k">CMD</span> <span class="p">[</span><span class="s2">&#34;-c&#34;</span><span class="p">]</span>  <span class="err">
+</span><span class="err"></span><span class="c"># 运行</span><span class="err">
+</span><span class="err"></span>docker run &lt;image&gt; 参数<span class="err">
+</span></code></pre></div><hr>
+<h3 id="0x09label">0x09、LABEL</h3>
+<ul>
+<li>形式：<code>LABEL &lt;key&gt;=&lt;value&gt; &lt;key&gt;=&lt;value&gt; &lt;key&gt;=&lt;value&gt; ...</code></li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="c"># 单行</span><span class="err">
+</span><span class="err"></span><span class="k">LABEL</span> multi.label1<span class="o">=</span><span class="s2">&#34;value1&#34;</span> multi.label2<span class="o">=</span><span class="s2">&#34;value2&#34;</span> <span class="nv">other</span><span class="o">=</span><span class="s2">&#34;value3&#34;</span><span class="err">
+</span><span class="err"></span><span class="c"># 多行</span><span class="err">
+</span><span class="err"></span><span class="k">LABEL</span> multi.label1<span class="o">=</span><span class="s2">&#34;value1&#34;</span> <span class="se">\
+</span><span class="se"></span>      multi.label2<span class="o">=</span><span class="s2">&#34;value2&#34;</span> <span class="se">\
+</span><span class="se"></span>      <span class="nv">other</span><span class="o">=</span><span class="s2">&#34;value3&#34;</span><span class="err">
+</span></code></pre></div><hr>
+<h3 id="0x10暴露-expose">0x10、暴露 EXPOSE</h3>
+<ul>
+<li>形式：<code>EXPOSE &lt;port&gt; [&lt;port&gt;/&lt;protocol&gt;...]</code></li>
+<li>示例：<code>EXPOSE 80/udp</code></li>
+</ul>
+<blockquote>
+<p><em>说明</em>：指定端口是侦听TCP还是UDP，如果未指定协议，则默认值为TCP。该指令可以理解为仅仅是声明容器打算使用什么端口而已，并不会自动在宿主进行端口映射。 一个是帮助镜像使用者理解这个镜像服务的守护端口，以方便配置映射；另一个用处则是在运行时使用随机端口映射时，也就是 docker run -P 时，会自动随机映射 EXPOSE 的端口。</p>
+</blockquote>
+<hr>
+<h3 id="0x11add">0x11、ADD</h3>
+<ul>
+<li>形式：</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="k">ADD</span> <span class="o">[</span>--chown<span class="o">=</span>&lt;user&gt;:&lt;group&gt;<span class="o">]</span> &lt;src&gt;... &lt;dest&gt;<span class="err">
+</span><span class="err"></span><span class="k">ADD</span> <span class="o">[</span>--chown<span class="o">=</span>&lt;user&gt;:&lt;group&gt;<span class="o">]</span> <span class="o">[</span><span class="s2">&#34;&lt;src&gt;&#34;</span>,... <span class="s2">&#34;&lt;dest&gt;&#34;</span><span class="o">]</span><span class="err">
+</span></code></pre></div><blockquote>
+<p>&ndash;chown功能仅在用于构建Linux容器<br>
+<code>ADD指令</code>复制文件，目录或远程文件URL<code>&lt;src&gt;</code>,到<code>&lt;dest&gt;</code>中。<br>
+<code>&lt;src&gt;可以包含通配符</code>,如果<src>是远程文件URL，则目标将具有600的权限<br>
+<code>&lt;dest&gt;</code>是相对于<code>WORKDIR</code>的绝对路径</p>
+</blockquote>
+<ul>
+<li>示例：</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="k">ADD</span> hom* /mydir/<span class="err">
+</span><span class="err"></span><span class="k">ADD</span> hom?.txt /mydir/<span class="err">
+</span><span class="err"></span><span class="k">ADD</span> --chown<span class="o">=</span>55:mygroup files* /somedir/<span class="err">
+</span></code></pre></div><hr>
+<h3 id="0x12user">0x12、USER</h3>
+<ul>
+<li>形式：</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="k">USER</span><span class="s"> &lt;user&gt;[:&lt;group&gt;]</span><span class="err">
+</span></code></pre></div><blockquote>
+<p><code>USER指令</code>设置运行映像时以及用于任何映像时使用的用户名和可选的用户组</p>
+</blockquote>
+<hr>
+<h3 id="0x13workdir">0x13、WORKDIR</h3>
+<ul>
+<li>形式：</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="k">WORKDIR</span><span class="s"> /path/to/workdir</span><span class="err">
+</span></code></pre></div><blockquote>
+<p><code>WORKDIR指令</code>指定工作目录，可以在中多次使用，如果提供了相对路径，则它将相对于上一条<code>WORKDIR指令</code>的路径.</p>
+</blockquote>
+<ul>
+<li>示例：</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="k">WORKDIR</span><span class="s"> /a</span><span class="err">
+</span><span class="err"></span><span class="k">WORKDIR</span><span class="s"> b #相对路径</span><span class="err">
+</span><span class="err"></span><span class="k">RUN</span> pwd<span class="err">
+</span></code></pre></div></article><section class="article labels"><a class="category" href=/categories/docker/>Docker</a><a class="tag" href=/tags/docker/>Docker</a></section><section class="article navigation"><p><a class="link" href="/posts/binary_tree/"><span class="li">&larr;</span>[算法] 二叉树</a></p><p><a class="link" href="/posts/udp/"><span class="li">&rarr;</span>UDP协议</a class="link">
+    </p></section><section class="article discussion"><div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "flyzero" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></section></div><section id="footer" class="footer max-body-width"><div class="footer-wrap">
+    <p class="copyright">©2020 flyzero.cn</p>
+    <p class="powerby"><span>Powered by </span><a href="https://gohugo.io" 
+        target="_blank">Hugo</a><span> and the </span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank">Notepadium</a></p>
+</div></section><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-156897505-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+</div>
+</body>
+
+</html>

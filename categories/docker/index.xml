@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Docker on flyzero</title>
+    <link>/categories/docker/</link>
+    <description>Recent content in Docker on flyzero</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>©2020 flyzero.cn</copyright>
+    <lastBuildDate>Thu, 19 Mar 2020 22:14:48 +0800</lastBuildDate>
+    
+        <atom:link href="/categories/docker/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Dockerfile 笔记</title>
+      <link>/posts/dockerfile/</link>
+      <pubDate>Thu, 19 Mar 2020 22:14:48 +0800</pubDate>
+      
+      <guid>/posts/dockerfile/</guid>
+      <description>官方文档：https://docs.docker.com/engine/reference/builder/ 0x01、用法 docker build（生成</description>
+    </item>
+    
+  </channel>
+</rss>

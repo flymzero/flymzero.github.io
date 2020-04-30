@@ -22,6 +22,15 @@
     </item>
     
     <item>
+      <title>Dockerfile 笔记</title>
+      <link>/posts/dockerfile/</link>
+      <pubDate>Thu, 19 Mar 2020 22:14:48 +0800</pubDate>
+      
+      <guid>/posts/dockerfile/</guid>
+      <description>官方文档：https://docs.docker.com/engine/reference/builder/ 0x01、用法 docker build（生成</description>
+    </item>
+    
+    <item>
       <title>UDP协议</title>
       <link>/posts/udp/</link>
       <pubDate>Tue, 18 Feb 2020 01:40:42 +0800</pubDate>
